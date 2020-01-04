@@ -15,11 +15,8 @@ export default {
     HelloWorld
   },
   methods:{
-
-    // ConsoleTest
     consoleTest() {
       console.log("ConsoleTest");
-      // Check Env file
       console.log(process.env.VUE_APP_API_URL_BASE);
     }
   }
