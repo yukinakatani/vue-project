@@ -17,9 +17,10 @@ export default {
   methods:{
     consoleTest() {
       console.log("ConsoleTest");
-      console.log(process.env.VUE_APP_API_URL_BASE);
     }
   }
   
 }
+
+
 </script>
