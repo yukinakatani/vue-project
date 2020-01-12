@@ -32,11 +32,29 @@
            >
            </el-table-column>
            <el-table-column
+            prop="status"
             label="Status"
            >
-            <el-button type="danger">詳細</el-button>
+            <template scope="scope">
+                <span v-if="scope.row.status===1"><el-button type="primary">利用可</el-button></span>
+                <span v-else-if="scope.row.status===2">退室中</span>
+                <span v-else-if="scope.row.status===3">会議中</span>
+            </template>
+           </el-table-column>
+           <el-table-column
+            label="詳細"
+           >
+           <template scope="scope">
+            <router-link 
+            :to="`/show/${scope.row.id}`"
+            >
+                <el-button type="danger">詳細</el-button>
+                </router-link>
+            </template>
            </el-table-column>
         </el-table>      
+
+
     </div>
   </div>
 </template>
@@ -45,15 +63,18 @@
 
 export default {
     name: 'Index',
-    props: {
-        'professors':{
-            type: Array,
-            required: true
-        }
-    },
     data () {
       return {
-          
+        //   Get Data From Firebase
+          professors : [
+        {id:1, name:"道重信",university_major : 1,status:1},
+        {id:2, name:"田中勇",university_major : 2,status:1},
+        {id:3, name:"伊藤尚広",university_major : 7,status:1},
+        {id:4, name:"山田隆",university_major : 4,status:1},
+        {id:5, name:"織田信正",university_major : 5,status:3},
+        {id:6, name:"武田震源",university_major : 7, status:1},
+        {id:7, name:"原直樹",university_major : 16, status:1},
+      ]
       }
     },
  
