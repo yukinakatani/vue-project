@@ -7,6 +7,8 @@
 </template>
 <script>
 /* eslint-disable no-console */
+
+
 export default {
   components: {
    
@@ -33,8 +35,10 @@ export default {
       const dataId = parseInt(this.$route.params.id,10);
       const data = this.professors.find(professor => (
         professor.id === dataId
+        
       ));
       this.professor = data;   
+      console.log(this.professor);
     }   
   }
   
