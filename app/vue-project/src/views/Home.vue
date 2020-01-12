@@ -5,7 +5,7 @@
 </template>
 <script>
 // @ is an alias to /src
-import Index from '@/components/Index.vue'
+import Index from '@/components/professors/Index.vue'
 
 export default {
   components: {
