@@ -1,6 +1,5 @@
 <template>
   <div class="home">
-   ID:{{professor.id}}
    教授名:{{professor.name}}
    <!-- 学部:{{professor.university_major}} -->
    <span v-if="professor.university_major===1">仏教学部禅学科</span>
@@ -19,7 +18,12 @@
                 <span v-else-if="professor.university_major===14">経営学部市場戦略学科</span>
                 <span v-else-if="professor.university_major===15">医療健康科学部診療放射線技術科学学科</span>
                 <span v-else-if="professor.university_major===16">グローバルメディアスタディーズ学部グローバルメディアスタディーズ学科</span>
+  {{time}}
+  {{dayOfWeek}}
+  {{month}}
+  {{date}}th
   </div>
+  
 </template>
 <script>
 /* eslint-disable no-console */
@@ -40,22 +44,34 @@ export default {
         {id:6, name:"武田震源",university_major : 7, status:1},
         {id:7, name:"原直樹",university_major : 16, status:1},
       ],
-      professor : []    
+      professor : [],
+      time : "",
+      dayOfWeek : "" ,
+      month : "",
+      date : ""
     }
   },
   mounted () {
       this.getUserDetail()
+      this.getNow()
   },
   methods:{
     getUserDetail () {
       const dataId = parseInt(this.$route.params.id,10);
       const data = this.professors.find(professor => (
-        professor.id === dataId
-        
+        professor.id === dataId  
       ));
       this.professor = data;   
-      console.log(this.professor);
-    }   
+    },
+    getNow () {
+      const today = new Date();
+      this.time = ("0"+today.getHours()).slice(-2) + ":" + ("0"+today.getMinutes()).slice(-2);
+      this.date = today.getDate();
+      const date = today.getDay();
+      this.dayOfWeek = [ "Sun,", "Mon,", "Tue,", "Wen,", "Thur,", "Fry,", "Sat," ][date];
+      const month = today.getMonth();
+      this.month = ['Jan','Feb','Mar','Apr','May','June','July','Aug','Sept','Oct','Nov','Dec'][month];
+    } 
   }
   
 }

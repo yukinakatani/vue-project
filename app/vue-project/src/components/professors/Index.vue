@@ -36,28 +36,40 @@
             label="Status"
            >
             <template scope="scope">
-                <span v-if="scope.row.status===1"><el-button type="primary">利用可</el-button></span>
-                <span v-else-if="scope.row.status===2">退室中</span>
-                <span v-else-if="scope.row.status===3">会議中</span>
+                <span v-if="scope.row.status===1"><el-tag>利用可</el-tag></span>
+                <span v-else-if="scope.row.status===2"><el-tag type="info">退室中</el-tag></span>
+                <span v-else-if="scope.row.status===3"><el-tag type="danger">会議中</el-tag></span>
             </template>
            </el-table-column>
-           <el-table-column
-            label="詳細"
-           >
-           <template scope="scope">
-            <router-link 
+           <el-table-column>
+           <!-- <template scope="scope"> -->
+            <!-- <router-link 
             :to="`/professor/${scope.row.id}`"
-            >
-                <el-button type="danger">詳細</el-button>
-                </router-link>
-            </template>
+            > -->
+              <el-button type="success" plain @click="dialogVisible=true">More...</el-button>
+            <!-- </router-link> -->
+            <!-- </template> -->
            </el-table-column>
-        </el-table>      
+        </el-table> 
+
+        <!-- Modal   -->
+        <el-dialog
+          title="Status"
+          :visible.sync="dialogVisible"
+          width="30%"
+        >
+          <span>詳細ページ</span>
+          <span slot="footer" class="dialog-footer">
+            <el-button @click="dialogVisible=false">Cancel</el-button>
+            <el-button type="primary" @click="dialogVisible = false">Confirm</el-button>
+          </span>
+        </el-dialog>
     </div>
   </div>
 </template>
 
 <script>
+
 
 export default {
     name: 'Index',
@@ -65,19 +77,21 @@ export default {
       return {
         //   Get Data From Firebase
           professors : [
-        {id:1, name:"道重信",university_major : 1,status:1},
+        {id:1, name:"道重信",university_major : 1,status:2},
         {id:2, name:"田中勇",university_major : 2,status:1},
-        {id:3, name:"伊藤尚広",university_major : 7,status:1},
+        {id:3, name:"伊藤尚広",university_major : 7,status:2},
         {id:4, name:"山田隆",university_major : 4,status:1},
         {id:5, name:"織田信正",university_major : 5,status:3},
         {id:6, name:"武田震源",university_major : 7, status:1},
-        {id:7, name:"原直樹",university_major : 16, status:1},
-      ]
+        {id:7, name:"原直樹",university_major : 16, status:2},
+      ],
+      dialogVisible: false
+     
       }
     },
  
   methods:{
-    
+ 
   }
   
 }
