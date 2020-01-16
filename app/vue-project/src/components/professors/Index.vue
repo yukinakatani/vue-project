@@ -51,13 +51,17 @@
         top="8vh"
         custom-class="modal"
       >   
+
+  <!-- PC -->
         <!-- <span slot="footer" class="dialog-footer"> -->
-        <el-row class="dialog-left-height">
-          <el-col :span="12" class="dialog-left">
+        <el-row class="dialog-left-height hidden-sm-and-down">
+          <el-col :xs="24" :sm="24" :md="12" :lg="12" class="dialog-left">
               <!-- v-bind:class="[professor.status===2 ? 'hey' : '']" -->
-              <span v-if="professor.status===1"><el-tag>利用可</el-tag></span>
-              <span v-else-if="professor.status===2"><el-tag type="info">退室中</el-tag></span>
-              <span v-else-if="professor.status===3"><el-tag type="danger">会議中</el-tag></span> 
+              <i v-if="professor.status===1" style="font-size: 200px;" class="el-icon-user"></i>
+              <span v-if="professor.status===1">利用可</span>
+              <span v-else-if="professor.status===2">退室中</span>
+              <span v-else-if="professor.status===3">会議中</span> 
+              
               {{professor.name}}
               <span v-if="professor.university_major===1">仏教学部禅学科</span>
               <span v-else-if="professor.university_major===2">文学部国文学科</span>
@@ -76,7 +80,42 @@
               <span v-else-if="professor.university_major===15">医療健康科学部診療放射線技術科学学科</span>
               <span v-else-if="professor.university_major===16">グローバルメディアスタディーズ学部グローバルメディアスタディーズ学科</span>        
           </el-col>
-          <el-col :span="12">
+          <el-col :xs="24" :sm="24" :md="12" :lg="12">
+            {{time}}
+            {{dayOfWeek}}
+            {{month}}
+            {{date}}th
+          </el-col>
+        </el-row>
+
+<!-- スマホ -->
+        <el-row class="hidden-md-and-up dialog-left-height-sm">
+          <el-col :xs="24" :sm="24">
+              <!-- v-bind:class="[professor.status===2 ? 'hey' : '']" -->
+              <span v-if="professor.status===1"><el-tag>利用可</el-tag></span>
+              <span v-else-if="professor.status===2"><el-tag type="info">退室中</el-tag></span>
+              <span v-else-if="professor.status===3"><el-tag type="danger">会議中</el-tag></span> 
+                {{professor.name}}
+              <span v-if="professor.university_major===1">仏教学部禅学科</span>
+              <span v-else-if="professor.university_major===2">文学部国文学科</span>
+              <span v-else-if="professor.university_major===3">文学部地理学科</span>
+              <span v-else-if="professor.university_major===4">文学部社会学科</span>
+              <span v-else-if="professor.university_major===5">文学部英米文学科</span>
+              <span v-else-if="professor.university_major===6">文学部歴史学科</span>
+              <span v-else-if="professor.university_major===7">文学部心理学科</span>
+              <span v-else-if="professor.university_major===8">経済学部経済学科</span>
+              <span v-else-if="professor.university_major===9">経済学部商学科</span>
+              <span v-else-if="professor.university_major===10">経済学部現代応用経済学科</span>
+              <span v-else-if="professor.university_major===11">法学部法律学科</span>
+              <span v-else-if="professor.university_major===12">法学部政治学科</span>
+              <span v-else-if="professor.university_major===13">経営学部経営学科</span>
+              <span v-else-if="professor.university_major===14">経営学部市場戦略学科</span>
+              <span v-else-if="professor.university_major===15">医療健康科学部診療放射線技術科学学科</span>
+              <span v-else-if="professor.university_major===16">グローバルメディアスタディーズ学部グローバルメディアスタディーズ学科</span>        
+          </el-col>
+        </el-row>
+        <el-row class="hidden-md-and-up dialog-left-height-sm">
+          <el-col :xs="24" :sm="24">
             {{time}}
             {{dayOfWeek}}
             {{month}}
@@ -140,24 +179,43 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
+
+$xl: 1920px; 
+$lg: 1200px;
+$md: 992px; 
+$sm: 768px; 
+
+
+
 .modal{
   height:85%;
 }
 
-.dialog-left-height{
-  height:100%;
+
+.el-dialog__headerbtn {
+  z-index: 10;
 }
 
-.dialog-left{
-  background-color:#F56C6C;
-   height:100%;
-}
-
-.el-dialog__body{
+.el-dialog__body {
   height:100%;
   position: relative;
   top: -84px;
-  
+    .dialog-left-height-sm{
+      height:50%;
+    }
+    .dialog-left-height {
+      height:100%;
+        .dialog-left {
+          background-color:#F56C6C;
+          height:100%;
+          position: relative;
+          left: -20px;
+        } 
+    }
 }
+
+
+
 </style>
+
